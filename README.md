@@ -32,6 +32,8 @@ To create a new project using the boilerplate:
 - install the npm dependencies by running `yarn`
 - Optional - rename the React Native project to your own project name: `yarn run rename -- <YourProjectName>` (the default name is `Boilerplate`)
 - remove the LICENSE file and the "License" section from the README if your project is not open source
+- add local.properties files in  android/ directory
+- add sdk.dir = /home/qainfotech/Android/Sdk in local.properties files
 - replace sdk path to your machine path in android/local.properties 
 
 
