@@ -1,22 +1,35 @@
+import React from 'react';
 import { createAppContainer, createStackNavigator, createBottomTabNavigator } from 'react-navigation'
-import {Platform} from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { Platform } from 'react-native'
 import HomeScreen from 'App/Screens/Home'
 import ProfileScreen from 'App/Screens/Profile'
 import SplashScreen from 'App/Screens/SplashScreen/SplashScreen'
 import LoginScreen from 'App/Screens/Login'
 import OTPScreen from 'App/Screens/Login/otp'
- 
+import LendMoneyScreen from 'App/Screens/Forms/LendMoney'
+
 /**
  * The root screen contains the application's navigation.
  *
  * @see https://reactnavigation.org/docs/en/hello-react-navigation.html#creating-a-stack-navigator
  */
 
+
+
+// Helper Method
+getTabBarVisibility = (navigation) => {
+  const routeName = navigation.state ? navigation.state.routes[navigation.state.index].routeName : '';
+  if(routeName === 'LendMoney')
+  return false
+  else
+  return true
+}
 const HomeStack = createStackNavigator({
   Home: {
     screen: HomeScreen,
     navigationOptions: {
-      headerTitle: 'Home',
+      headerTitle: 'Dashboard',
       headerTitleStyle: {
         ...Platform.select({
           ios: { fontFamily: 'Arial', },
@@ -24,6 +37,13 @@ const HomeStack = createStackNavigator({
         }),
       }
     },
+  },
+  LendMoney: {
+    screen: LendMoneyScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Add Transaction',
+    }
+    )
   },
 });
 
@@ -45,20 +65,33 @@ const ProfileStack = createStackNavigator({
 const MainTabs = createBottomTabNavigator({
   Home: {
     screen: HomeStack,
-    navigationOptions: {
-      tabBarLabel: 'Home',
-    },
+    navigationOptions: ({ navigation }) => ({
+      tabBarLabel: 'Dashboard',
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="home" color={tintColor} size={25} />
+      ),
+      tabBarVisible:getTabBarVisibility(navigation)
+    }
+    )
   },
   Profile: {
     screen: ProfileStack,
     navigationOptions: {
       tabBarLabel: 'Profile',
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="account" color={tintColor} size={25} />
+      ),
+
     },
   }
-});
+}, {
+    tabBarOptions: {
+      activeTintColor: '#316064'
+    }
+  });
 
 MainTabs.navigationOptions = {
-  header : null
+  header: null
 }
 
 
@@ -70,19 +103,19 @@ const StackNavigator = createStackNavigator(
     // The main application screen is our "ExampleScreen". Feel free to replace it with your
     // own screen and remove the example.
     MainScreen: {
-      screen:MainTabs,
+      screen: MainTabs,
       navigationOptions: () => ({
-        headerMode:'none'
+        headerMode: 'none'
       }),
     },
     LoginScreen: {
-      screen:LoginScreen,
+      screen: MainTabs,
       navigationOptions: () => ({
         title: `Login`,
       }),
     },
-    OTPScreen:{
-      screen:OTPScreen,
+    OTPScreen: {
+      screen: OTPScreen,
       navigationOptions: () => ({
         title: `Verify OTP`,
       }),
@@ -93,7 +126,7 @@ const StackNavigator = createStackNavigator(
     initialRouteName: 'SplashScreen',
     // See https://reactnavigation.org/docs/en/stack-navigator.html#stacknavigatorconfig
     headerMode: 'screen',
-    mode:'modal'
+    mode: 'modal'
   }
 )
 

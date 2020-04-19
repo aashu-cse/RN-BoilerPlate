@@ -140,8 +140,10 @@ export default StyleSheet.create({
     flexDirection: 'row',
   },
   rowMain: {
+    flex:1,
     flexDirection: 'row',
     justifyContent: 'center',
+    borderWidth:5
   },
   rowReverse: {
     flexDirection: 'row-reverse',
@@ -169,4 +171,5 @@ export default StyleSheet.create({
   textRight: {
     textAlign: 'right',
   },
+  
 })

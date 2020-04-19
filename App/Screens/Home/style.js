@@ -1,5 +1,7 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import { Helpers, Metrics, Fonts, Colors } from 'App/Theme'
+
+const screenHeight = Dimensions.get('window').height
 
 export default StyleSheet.create({
   error: {
@@ -27,6 +29,44 @@ export default StyleSheet.create({
   text: {
     ...Fonts.normal,
     marginBottom: Metrics.tiny,
-    textAlign: 'center',
+    textAlign: 'left',
   },
+  sectionTitle: {
+    ...Fonts.normal,
+    marginBottom: Metrics.small,
+    textAlign: 'left',
+    fontWeight:'bold'
+  },
+  linearGradient: {
+    flex: 1,
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5
+  },
+  buttonText: {
+    fontSize: 18,
+    fontFamily: 'Gill Sans',
+    textAlign: 'center',
+    margin: 10,
+    color: '#ffffff',
+    backgroundColor: 'transparent',
+  },
+
+  container:{
+    flexDirection:'column',
+    justifyContent:"flex-start",
+    marginVertical:10,
+    marginHorizontal:10
+  },
+  scrollContainer:{
+    height:screenHeight/7,
+    marginBottom:10
+  },
+  item: {
+    display:'flex',
+  },
+  title: {
+    fontSize: 32,
+  },
+
 })
